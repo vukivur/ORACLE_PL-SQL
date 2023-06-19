@@ -4,7 +4,7 @@ DECLARE
   num_dog       VARCHAR(10);
   date_dog      DATE;
 BEGIN
-  /*Все переменные, испоьзуемые далее*/
+  /*Г‚Г±ГҐ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ, ГЁГ±ГЇГ®ГјГ§ГіГҐГ¬Г»ГҐ Г¤Г Г«ГҐГҐ*/
   id_client := 104;  
 
   SELECT COUNT(*)
@@ -12,7 +12,7 @@ BEGIN
     FROM Credits
    WHERE ClientID = id_client;
    
-  DBMS_OUTPUT.put_line('Количество кредитов: ' || count_credits);
+  DBMS_OUTPUT.put_line('ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЄГ°ГҐГ¤ГЁГІГ®Гў: ' || count_credits);
   
   IF count_credits > 0 THEN 
     SELECT c.dog_num, c.date_start
@@ -20,8 +20,8 @@ BEGIN
       FROM Credits c
     WHERE ClientID = id_client;
     
-    DBMS_OUTPUT.put_line(num_dog || ' от ' || to_char(date_dog, 'dd.mm.yyyy'));
+    DBMS_OUTPUT.put_line(num_dog || ' Г®ГІ ' || to_char(date_dog, 'dd.mm.yyyy'));
   ELSE
-    DBMS_OUTPUT.put_line('Договоров нет.');
+    DBMS_OUTPUT.put_line('Г„Г®ГЈГ®ГўГ®Г°Г®Гў Г­ГҐГІ.');
   END IF;
-END;          
+END;     
