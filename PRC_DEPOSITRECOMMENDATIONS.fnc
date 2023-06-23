@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION PRC_DEPOSITRECOMMENDATIONS
   vPRC_New     NUMBER;
 BEGIN
   IF pSum < 10000 OR pSum > 1000000 THEN
-    DBMS_OUTPUT.put_line('Некорректный ввод. Вклад возможен на сумму от 10000 до 1000000 руб.');
+    DBMS_OUTPUT.put_line('ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© ГўГўГ®Г¤. Г‚ГЄГ«Г Г¤ ГўГ®Г§Г¬Г®Г¦ГҐГ­ Г­Г  Г±ГіГ¬Г¬Гі Г®ГІ 10000 Г¤Г® 1000000 Г°ГіГЎ.');
     RETURN 0;
   END IF;
   
@@ -17,7 +17,7 @@ BEGIN
     FROM deposits d INNER JOIN accounts a
       ON d.accountid = a.accountid
    WHERE d.clientid = pClientID
-     AND d.dog_date BETWEEN ADD_MONTHS(SYSDATE, - 12) AND SYSDATE
+     AND d.dog_date >= ADD_MONTHS(SYSDATE, - 12)
      AND a.currencyname = pCurrencyName;
   
   IF vCountDepositsBefore > 0 THEN
@@ -26,7 +26,7 @@ BEGIN
       FROM deposits d INNER JOIN accounts a
         ON d.accountid = a.accountid
      WHERE d.clientid = pClientID
-       AND d.dog_date BETWEEN ADD_MONTHS(SYSDATE, - 12) AND SYSDATE
+       AND d.dog_date >= ADD_MONTHS(SYSDATE, - 12)
        AND a.currencyname = pCurrencyName;
   END IF;
   
@@ -46,10 +46,10 @@ BEGIN
   
 EXCEPTION
   WHEN NO_DATA_FOUND THEN
-    DBMS_OUTPUT.put_line('Некорректные данные заданы.');
+    DBMS_OUTPUT.put_line('ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»ГҐ Г¤Г Г­Г­Г»ГҐ Г§Г Г¤Г Г­Г».');
     RETURN 0;
   WHEN TOO_MANY_ROWS THEN
-    DBMS_OUTPUT.put_line('Некорректный ввод. Много строк.');
+    DBMS_OUTPUT.put_line('ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© ГўГўГ®Г¤. ГЊГ­Г®ГЈГ® Г±ГІГ°Г®ГЄ.');
     RETURN 0;
 END;
 /
